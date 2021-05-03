@@ -1,0 +1,16 @@
+fig, axes = plt.subplots(3, 1, figsize=(15,10), sharex=True)
+for i, cycle in enumerate(cycles):
+    cycle["R"].plot(ax=axes[0], label=f"Cycle {i}")
+    cycle["F10.7"].plot(ax=axes[1])
+    cycle["Dst_count"].plot(ax=axes[2])
+N_cycles = len(cycles)
+(sum(cycles)["R"]/N_cycles).plot(ax=axes[0], color="black", label="Mean")
+(sum(cycles)["F10.7"]/N_cycles).plot(ax=axes[1], color="black")
+(sum(cycles)["Dst_count"]/N_cycles).plot(ax=axes[2], color="black")
+axes[0].legend()
+axes[0].set_ylabel("Sunspot Number")
+axes[1].set_ylabel("F10.7")
+axes[2].set_ylabel("Storm rate")
+axes[2].set_xlabel("Days since minimum")
+for ax in axes:
+    ax.grid()
